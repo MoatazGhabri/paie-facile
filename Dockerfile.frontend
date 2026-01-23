@@ -34,4 +34,4 @@ COPY --from=frontend-builder /app/dist ./dist
 EXPOSE 8087
 
 # Start HTTP server
-CMD ["http-server", "dist", "-p", "8087", "--cors"]
+CMD ["http-server", "dist", "-p", "8087", "--cors", "-s", "-c-1"]
