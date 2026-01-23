@@ -1,0 +1,34 @@
+# Frontend Build Stage
+FROM node:20-alpine AS frontend-builder
+
+WORKDIR /app
+
+# Copy dependencies
+COPY package.json bun.lockb ./
+RUN npm install
+
+# Copy frontend source and config files
+COPY src ./src
+COPY public ./public
+COPY index.html vite.config.ts tsconfig.json tsconfig.app.json tsconfig.node.json ./
+COPY components.json eslint.config.js postcss.config.js tailwind.config.ts ./
+
+# Build frontend
+RUN npm run build
+
+# Frontend Runtime Stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install a simple HTTP server
+RUN npm install -g http-server
+
+# Copy built frontend from builder
+COPY --from=frontend-builder /app/dist ./dist
+
+# Expose port
+EXPOSE 8087
+
+# Start HTTP server
+CMD ["http-server", "dist", "-p", "8087", "--cors"]

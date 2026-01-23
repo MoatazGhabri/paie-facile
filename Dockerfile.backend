@@ -1,0 +1,31 @@
+# Backend Runtime Stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install server dependencies
+COPY server/package.json server/package-lock.json* ./
+RUN npm install
+
+# Copy server source
+COPY server/src ./src
+COPY server/tsconfig.json ./
+
+# Create uploads directory
+RUN mkdir -p ./uploads
+
+# Environment variables
+ENV SERVER_PORT=3005
+ENV DB_HOST=31.97.177.87
+ENV DB_PORT=3307
+ENV DB_USER=root
+ENV DB_PASSWORD=StrongPass123
+ENV DB_NAME=emoloye
+ENV JWT_SECRET=change-this-secret-key
+ENV NODE_ENV=production
+
+# Expose port
+EXPOSE 3005
+
+# Start server
+CMD ["npm", "start"]
