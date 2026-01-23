@@ -7,10 +7,11 @@ WORKDIR /app
 COPY package.json bun.lockb ./
 RUN npm install
 
-# Copy frontend source
+# Copy frontend source and config files
 COPY src ./src
 COPY public ./public
-COPY index.html vite.config.ts tsconfig.json tsconfig.app.json ./
+COPY index.html vite.config.ts tsconfig.json tsconfig.app.json tsconfig.node.json ./
+COPY components.json eslint.config.js postcss.config.js tailwind.config.ts ./
 
 # Build frontend
 RUN npm run build
