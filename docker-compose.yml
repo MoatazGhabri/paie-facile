@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+      args:
+        - VITE_API_URL=http://backend:3005/api
     ports:
       - "8087:8087"
     environment:
