@@ -33,5 +33,5 @@ COPY --from=frontend-builder /app/dist ./dist
 # Expose port
 EXPOSE 8087
 
-# Start HTTP server
-CMD ["http-server", "dist", "-p", "8087", "--cors", "-s", "-c-1"]
+# Start HTTP server with fallback to index.html for SPA routing
+CMD ["http-server", "dist", "-p", "8087", "--cors", "-f"]
