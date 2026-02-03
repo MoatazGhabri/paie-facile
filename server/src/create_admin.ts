@@ -9,7 +9,7 @@ const createAdmin = async () => {
         console.log('Database connected.');
 
         // Sync models to ensure tables exist
-        await sequelize.sync({ alter: true });
+        await sequelize.sync(); // sans alter
 
         const email = 'admin@paiefacile.com';
         const password = 'admin123';

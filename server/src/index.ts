@@ -470,7 +470,7 @@ app.post('/api/generate-payslip', async (req, res) => {
 // Start Server
 const startServer = async () => {
     try {
-        await sequelize.sync({ alter: true });
+        await sequelize.sync(); // sans alter
         console.log('Database synced successfully');
 
         const server = app.listen(PORT, () => {
