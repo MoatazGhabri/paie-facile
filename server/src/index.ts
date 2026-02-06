@@ -540,7 +540,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE TRAVAIL', 50, currentY, { align: 'center' });
 
-        currentY += 180; // Large space between title and paragraph
+        currentY += 150; // Large space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
@@ -595,7 +595,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
             doc.font('Helvetica-Bold').text(missionEndDate, { continued: false });
         }
 
-        currentY += 180; // Increased space between content and "Nous délivrons..."
+        currentY += 150; // Increased space between content and "Nous délivrons..."
 
         doc.font('Helvetica').fontSize(13);
         doc.text(`Nous délivrons la présente attestation pour servir et valoir ce que de droit.`, 50, currentY, {
@@ -680,7 +680,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE STAGE', 50, currentY, { align: 'center' });
 
-        currentY += 180; // Large space between title and paragraph
+        currentY += 150; // Large space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
