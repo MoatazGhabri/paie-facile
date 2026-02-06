@@ -288,6 +288,14 @@ export default function Employees() {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="nationalite">Nationalité *</Label>
+                <Input
+                  id="nationalite"
+                  value={formData.nationalite}
+                  onChange={(e) => setFormData({ ...formData, nationalite: e.target.value })}
+                  placeholder="par ex. tunisienne"
+                  required
+                />
               </div>
             </div>
             <div className="space-y-2">
