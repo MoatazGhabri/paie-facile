@@ -535,12 +535,12 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         // Horizontal Line
         doc.moveTo(50, currentY + 80).lineTo(550, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
 
-        currentY = 180;
+        currentY = 130;
 
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE TRAVAIL', 50, currentY, { align: 'center' });
 
-        currentY += 150; // Large space between title and paragraph
+        currentY += 120; // Large space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
@@ -595,7 +595,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
             doc.font('Helvetica-Bold').text(missionEndDate, { continued: false });
         }
 
-        currentY += 150; // Increased space between content and "Nous délivrons..."
+        currentY += 120; // Increased space between content and "Nous délivrons..."
 
         doc.font('Helvetica').fontSize(13);
         doc.text(`Nous délivrons la présente attestation pour servir et valoir ce que de droit.`, 50, currentY, {
@@ -675,12 +675,12 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         // Horizontal Line
         doc.moveTo(50, currentY + 80).lineTo(550, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
 
-        currentY = 180;
+        currentY = 130;
 
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE STAGE', 50, currentY, { align: 'center' });
 
-        currentY += 150; // Large space between title and paragraph
+        currentY += 120; // Large space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
