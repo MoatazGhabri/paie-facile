@@ -535,12 +535,12 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         // Horizontal Line
         doc.moveTo(50, currentY + 80).lineTo(550, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
 
-        currentY = 130;
+        currentY = 180;
 
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE TRAVAIL', 50, currentY, { align: 'center' });
 
-        currentY += 180; // Large space between title and paragraph
+        currentY += 120; // Large space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
