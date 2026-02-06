@@ -13,7 +13,8 @@ export const useAttestations = () => {
         issuanceDate: string,
         ville?: string,
         departement?: string,
-        dateFin?: string
+        dateFin?: string,
+        civilite?: string
     }) => {
         setIsGenerating(true);
         try {
@@ -50,7 +51,8 @@ export const useAttestations = () => {
         dateFin: string,
         issuanceDate: string,
         ville?: string,
-        departement?: string
+        departement?: string,
+        civilite?: string
     }) => {
         setIsGenerating(true);
         try {

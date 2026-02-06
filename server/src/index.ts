@@ -492,7 +492,7 @@ app.post('/api/generate-payslip', async (req, res) => {
 
 app.post('/api/generate-work-certificate', async (req, res) => {
     try {
-        const { employeeId, isCurrent, issuanceDate, ville, departement, dateFin } = req.body;
+        const { employeeId, isCurrent, issuanceDate, ville, departement, dateFin, civilite } = req.body;
         const employee = await Employee.findByPk(employeeId);
         const company = await Company.findOne();
 
@@ -527,7 +527,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         }
 
         // Company Details (on the right)
-        doc.font('Helvetica-Bold').fontSize(11); // Increased font size
+        doc.font('Helvetica-Bold').fontSize(9); // Increased font size
         doc.text(`MF : ${company?.matricule_fiscal || ''}`, 420, currentY, { width: 130, align: 'left' });
         doc.text(`BANQUE : ${company?.banque || ''}`, 420, currentY + 18, { width: 130, align: 'left' }); // Increased spacing
         doc.text(`CCB : ${company?.ccb || ''}`, 420, currentY + 36, { width: 130, align: 'left' }); // Increased spacing
@@ -540,7 +540,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE TRAVAIL', 50, currentY, { align: 'center' });
 
-        currentY += 60;
+        currentY += 100; // Increased space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
@@ -564,7 +564,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         doc.font('Helvetica-Bold').text(company?.nom || '', { continued: true });
         doc.font('Helvetica').text(`, attestons par la présente que `, { continued: true });
 
-        doc.font('Helvetica-Bold').fontSize(14).text(`${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
+        doc.font('Helvetica-Bold').fontSize(14).text(`${civilite || 'Monsieur/Madame'} ${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
 
         doc.font('Helvetica').fontSize(13).text(`, de nationalité `, { continued: true });
         doc.font('Helvetica-Bold').text(employee.nationalite || 'tunisienne', { continued: true });
@@ -631,7 +631,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
 
 app.post('/api/generate-internship-certificate', async (req, res) => {
     try {
-        const { employeeId, dateDebut, dateFin, issuanceDate, ville, departement } = req.body;
+        const { employeeId, dateDebut, dateFin, issuanceDate, ville, departement, civilite } = req.body;
         const employee = await Employee.findByPk(employeeId);
         const company = await Company.findOne();
 
@@ -679,7 +679,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         // Title
         doc.font('Helvetica-Bold').fontSize(24).text('ATTESTATION DE STAGE', 50, currentY, { align: 'center' });
 
-        currentY += 60;
+        currentY += 100; // Increased space between title and paragraph
 
         // Body
         doc.font('Helvetica').fontSize(13);
@@ -703,7 +703,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         doc.font('Helvetica-Bold').text(company?.nom || '', { continued: true });
         doc.font('Helvetica').text(`, attestons par la présente que `, { continued: true });
 
-        doc.font('Helvetica-Bold').fontSize(14).text(`${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
+        doc.font('Helvetica-Bold').fontSize(14).text(`${civilite || 'Monsieur/Madame'} ${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
 
         doc.font('Helvetica').fontSize(13).text(`, de nationalité `, { continued: true });
         doc.font('Helvetica-Bold').text(employee.nationalite || 'tunisienne', { continued: true });

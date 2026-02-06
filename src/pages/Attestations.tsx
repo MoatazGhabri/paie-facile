@@ -26,6 +26,7 @@ export default function Attestations() {
         issuanceDate: new Date().toISOString().split('T')[0],
         ville: '',
         departement: '',
+        civilite: 'Monsieur',
     });
 
     const selectedEmployee = employees.find(e => e.id === formData.employeeId);
@@ -44,6 +45,8 @@ export default function Attestations() {
                 issuanceDate: formData.issuanceDate,
                 ville: formData.ville,
                 departement: formData.departement,
+                dateFin: formData.isCurrent ? undefined : formData.dateFin,
+                civilite: formData.civilite,
             });
         } else {
             if (!formData.dateDebut || !formData.dateFin) {
@@ -57,6 +60,7 @@ export default function Attestations() {
                 issuanceDate: formData.issuanceDate,
                 ville: formData.ville,
                 departement: formData.departement,
+                civilite: formData.civilite,
             });
         }
     };
@@ -184,6 +188,22 @@ export default function Attestations() {
                                     onChange={(e) => setFormData({ ...formData, ville: e.target.value })}
                                 />
                             </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="civilite">Civilité *</Label>
+                            <Select
+                                value={formData.civilite}
+                                onValueChange={(value) => setFormData({ ...formData, civilite: value })}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Choisir la civilité" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="Monsieur">Monsieur</SelectItem>
+                                    <SelectItem value="Madame">Madame</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
 
                         <div className="space-y-2">
