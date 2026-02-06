@@ -677,7 +677,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         }
 
         // Company Details (on the right)
-        doc.font('Helvetica-Bold').fontSize(11); // Increased font size
+        doc.font('Helvetica-Bold').fontSize(9); // Standardized to 9pt like work certificate
         doc.text(`MF : ${company?.matricule_fiscal || ''}`, 420, currentY, { width: 130, align: 'left' });
         doc.text(`BANQUE : ${company?.banque || ''}`, 420, currentY + 18, { width: 130, align: 'left' }); // Increased spacing
         doc.text(`CCB : ${company?.ccb || ''}`, 420, currentY + 36, { width: 130, align: 'left' }); // Increased spacing
@@ -744,7 +744,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
             doc.text(`.`, { continued: false });
         }
 
-        currentY += 180; // Increased space between content and "Nous délivrons..."
+        currentY += 120; // Standardized to 120pt space before "Nous délivrons..."
 
         doc.font('Helvetica').fontSize(13);
         doc.text(`Nous délivrons la présente attestation pour servir et valoir ce que de droit.`, 50, currentY, {
