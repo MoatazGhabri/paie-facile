@@ -72,6 +72,25 @@ export class Employee extends Model {
     })
     nationalite!: string;
 
+    @Column({
+        type: DataType.ENUM('CIN', 'Passeport'),
+        allowNull: true,
+        defaultValue: 'CIN',
+    })
+    id_type!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    id_date!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    id_place!: string;
+
     @HasMany(() => Salary)
     salaries!: Salary[];
 }

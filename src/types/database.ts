@@ -13,6 +13,9 @@ export interface Employee {
   poste: string;
   nationalite: string;
   date_embauche: string;
+  id_type: 'CIN' | 'Passeport';
+  id_date: string | null;
+  id_place: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -67,6 +70,9 @@ export interface EmployeeFormData {
   poste: string;
   nationalite: string;
   date_embauche: string;
+  id_type: 'CIN' | 'Passeport';
+  id_date?: string;
+  id_place?: string;
 }
 
 export interface SalaryFormData {

@@ -64,6 +64,9 @@ export default function Employees() {
     service: '',
     poste: '',
     nationalite: 'tunisienne',
+    id_type: 'CIN',
+    id_date: '',
+    id_place: '',
     date_embauche: new Date().toISOString().split('T')[0],
   });
 
@@ -76,6 +79,9 @@ export default function Employees() {
       service: '',
       poste: '',
       nationalite: 'tunisienne',
+      id_type: 'CIN',
+      id_date: '',
+      id_place: '',
       date_embauche: new Date().toISOString().split('T')[0],
     });
     setSelectedEmployee(null);
@@ -92,6 +98,9 @@ export default function Employees() {
         service: employee.service || '',
         poste: employee.poste,
         nationalite: employee.nationalite || 'tunisienne',
+        id_type: employee.id_type || 'CIN',
+        id_date: employee.id_date || '',
+        id_place: employee.id_place || '',
         date_embauche: employee.date_embauche.split('T')[0],
       });
     } else {
@@ -183,6 +192,12 @@ export default function Employees() {
                   </TableCell>
                   <TableCell>{employee.poste}</TableCell>
                   <TableCell>{employee.nationalite}</TableCell>
+                  <TableCell>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase">{employee.id_type}</span>
+                      <span className="font-mono">{employee.cin}</span>
+                    </div>
+                  </TableCell>
                   <TableCell>{formatShortDate(employee.date_embauche)}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
@@ -295,6 +310,57 @@ export default function Employees() {
                   onChange={(e) => setFormData({ ...formData, nationalite: e.target.value })}
                   placeholder="par ex. tunisienne"
                   required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="id_type">Type de document *</Label>
+                <Select
+                  value={formData.id_type}
+                  onValueChange={(value: 'CIN' | 'Passeport') =>
+                    setFormData({ ...formData, id_type: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="CIN">CIN</SelectItem>
+                    <SelectItem value="Passeport">Passeport</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="cin">Numéro du document *</Label>
+                <Input
+                  id="cin"
+                  value={formData.cin}
+                  onChange={(e) => setFormData({ ...formData, cin: e.target.value })}
+                  placeholder={formData.id_type === 'CIN' ? "Numéro de CIN" : "Numéro de Passeport"}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="id_date">Date de délivrance</Label>
+                <Input
+                  id="id_date"
+                  type="date"
+                  value={formData.id_date}
+                  onChange={(e) => setFormData({ ...formData, id_date: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="id_place">Lieu de délivrance</Label>
+                <Input
+                  id="id_place"
+                  value={formData.id_place}
+                  onChange={(e) => setFormData({ ...formData, id_place: e.target.value })}
+                  placeholder="Lieu de délivrance"
                 />
               </div>
             </div>

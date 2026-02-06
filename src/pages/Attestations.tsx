@@ -200,8 +200,8 @@ export default function Attestations() {
                                     <SelectValue placeholder="Choisir la civilité" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="Monsieur">Monsieur</SelectItem>
-                                    <SelectItem value="Madame">Madame</SelectItem>
+                                    <SelectItem value="Monsieur">Mr</SelectItem>
+                                    <SelectItem value="Madame">Mme</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>

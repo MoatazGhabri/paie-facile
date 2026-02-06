@@ -557,21 +557,32 @@ app.post('/api/generate-work-certificate', async (req, res) => {
             day: 'numeric'
         });
 
-        const hireDate = formatDateFr(employee.date_embauche);
-        const missionEndDate = dateFin ? formatDateFr(dateFin) : today;
+        const civ = civilite === 'Monsieur' ? 'Mr.' : 'Mme';
+        const docType = employee.id_type || 'CIN';
+        const docDate = employee.id_date ? formatDateFr(employee.id_date) : '(date)';
+        const docPlace = employee.id_place || '(lieu)';
 
         doc.y = currentY; // Ensure spacing is applied
         doc.text(`Nous, `, { continued: true, lineGap: 5 });
         doc.font('Helvetica-Bold').text(company?.nom || '', { continued: true });
         doc.font('Helvetica').text(`, attestons par la présente que `, { continued: true });
 
-        doc.font('Helvetica-Bold').fontSize(14).text(`${civilite || 'Monsieur/Madame'} ${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
+        doc.font('Helvetica-Bold').fontSize(14).text(`${civ} ${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
 
         doc.font('Helvetica').fontSize(13).text(`, de nationalité `, { continued: true });
         doc.font('Helvetica-Bold').text(employee.nationalite || 'tunisienne', { continued: true });
-        doc.font('Helvetica').text(`, titulaire du CIN n° `, { continued: true });
+        doc.font('Helvetica').text(`, titulaire du `, { continued: true });
+        doc.font('Helvetica-Bold').text(docType, { continued: true });
+        doc.font('Helvetica').text(` n° `, { continued: true });
         doc.font('Helvetica-Bold').text(employee.cin, { continued: true });
+        doc.font('Helvetica').text(`, délivré le `, { continued: true });
+        doc.font('Helvetica-Bold').text(docDate, { continued: true });
+        doc.font('Helvetica').text(` à `, { continued: true });
+        doc.font('Helvetica-Bold').text(docPlace, { continued: true });
         doc.font('Helvetica').text(`, `, { continued: true });
+
+        const hireDate = formatDateFr(employee.date_embauche);
+        const missionEndDate = dateFin ? formatDateFr(dateFin) : today;
 
         if (isCurrent) {
             doc.text(`occupe actuellement le poste de `, { continued: true });
@@ -697,20 +708,32 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
             day: 'numeric'
         });
 
-        const start = dateDebut ? formatDateFr(dateDebut) : formatDateFr(employee.date_embauche);
-        const end = dateFin ? formatDateFr(dateFin) : new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const civ = civilite === 'Monsieur' ? 'Mr.' : 'Mme';
+        const docType = employee.id_type || 'CIN';
+        const docDate = employee.id_date ? formatDateFr(employee.id_date) : '(date)';
+        const docPlace = employee.id_place || '(lieu)';
 
         doc.y = currentY; // Ensure spacing is applied
         doc.text(`Nous, `, { continued: true, lineGap: 5 });
         doc.font('Helvetica-Bold').text(company?.nom || '', { continued: true });
         doc.font('Helvetica').text(`, attestons par la présente que `, { continued: true });
 
-        doc.font('Helvetica-Bold').fontSize(14).text(`${civilite || 'Monsieur/Madame'} ${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
+        doc.font('Helvetica-Bold').fontSize(14).text(`${civ} ${employee.nom.toUpperCase()} ${employee.prenom}`, { continued: true });
 
         doc.font('Helvetica').fontSize(13).text(`, de nationalité `, { continued: true });
         doc.font('Helvetica-Bold').text(employee.nationalite || 'tunisienne', { continued: true });
-        doc.font('Helvetica').text(`, titulaire du CIN n° `, { continued: true });
+        doc.font('Helvetica').text(`, titulaire du `, { continued: true });
+        doc.font('Helvetica-Bold').text(docType, { continued: true });
+        doc.font('Helvetica').text(` n° `, { continued: true });
         doc.font('Helvetica-Bold').text(employee.cin, { continued: true });
+        doc.font('Helvetica').text(`, délivré le `, { continued: true });
+        doc.font('Helvetica-Bold').text(docDate, { continued: true });
+        doc.font('Helvetica').text(` à `, { continued: true });
+        doc.font('Helvetica-Bold').text(docPlace, { continued: true });
+        const start = dateDebut ? formatDateFr(dateDebut) : formatDateFr(employee.date_embauche);
+        const end = dateFin ? formatDateFr(dateFin) : new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        doc.font('Helvetica').text(`, `, { continued: true });
         doc.font('Helvetica').text(`, a effectué un stage au sein de notre entreprise du `, { continued: true });
         doc.font('Helvetica-Bold').text(start, { continued: true });
         doc.font('Helvetica').text(` au `, { continued: true });
