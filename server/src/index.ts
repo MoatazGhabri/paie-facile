@@ -560,6 +560,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         const hireDate = formatDateFr(employee.date_embauche);
         const missionEndDate = dateFin ? formatDateFr(dateFin) : today;
 
+        doc.y = currentY; // Ensure spacing is applied
         doc.text(`Nous, `, { continued: true, lineGap: 5 });
         doc.font('Helvetica-Bold').text(company?.nom || '', { continued: true });
         doc.font('Helvetica').text(`, attestons par la présente que `, { continued: true });
@@ -699,6 +700,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         const start = dateDebut ? formatDateFr(dateDebut) : formatDateFr(employee.date_embauche);
         const end = dateFin ? formatDateFr(dateFin) : new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
+        doc.y = currentY; // Ensure spacing is applied
         doc.text(`Nous, `, { continued: true, lineGap: 5 });
         doc.font('Helvetica-Bold').text(company?.nom || '', { continued: true });
         doc.font('Helvetica').text(`, attestons par la présente que `, { continued: true });
