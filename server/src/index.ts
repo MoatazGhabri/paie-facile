@@ -532,8 +532,8 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         doc.text(`BANQUE : ${company?.banque || ''}`, 420, currentY + 18, { width: 130, align: 'left' }); // Increased spacing
         doc.text(`CCB : ${company?.ccb || ''}`, 420, currentY + 36, { width: 130, align: 'left' }); // Increased spacing
 
-        // Horizontal Line
-        doc.moveTo(50, currentY + 80).lineTo(550, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
+        // Horizontal Line (Full Width)
+        doc.moveTo(0, currentY + 80).lineTo(595, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
 
         currentY = 180;
 
@@ -578,8 +578,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
         doc.font('Helvetica').text(`, délivré le `, { continued: true });
         doc.font('Helvetica-Bold').text(docDate, { continued: true });
         doc.font('Helvetica').text(` à `, { continued: true });
-        doc.font('Helvetica-Bold').text(docPlace, { continued: true });
-        doc.font('Helvetica').text(`, `, { continued: true });
+        doc.font('Helvetica-Bold').text(docPlace + `, `, { continued: true });
 
         const hireDate = formatDateFr(employee.date_embauche);
         const missionEndDate = dateFin ? formatDateFr(dateFin) : today;
@@ -626,7 +625,7 @@ app.post('/api/generate-work-certificate', async (req, res) => {
 
         // --- STICKY FOOTER ---
         const footerY = 750; // Slightly higher to ensure it stays on page
-        doc.moveTo(50, footerY - 10).lineTo(550, footerY - 10).lineWidth(1).strokeColor('#1ab0e2').stroke();
+        doc.moveTo(0, footerY - 10).lineTo(595, footerY - 10).lineWidth(1).strokeColor('#1ab0e2').stroke();
         doc.font('Helvetica-Bold').fontSize(9).text(`S.A.R.L Au capital de ${company?.capital || ''}`, 50, footerY, { align: 'center', width: 500 });
         doc.font('Helvetica').fontSize(8);
         doc.text(`Siège Social : ${company?.adresse || ''}, ${company?.ville || ''}`, 50, footerY + 12, { align: 'center', width: 500 });
@@ -683,8 +682,8 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
         doc.text(`BANQUE : ${company?.banque || ''}`, 420, currentY + 18, { width: 130, align: 'left' }); // Increased spacing
         doc.text(`CCB : ${company?.ccb || ''}`, 420, currentY + 36, { width: 130, align: 'left' }); // Increased spacing
 
-        // Horizontal Line
-        doc.moveTo(50, currentY + 80).lineTo(550, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
+        // Horizontal Line (Full Width)
+        doc.moveTo(0, currentY + 80).lineTo(595, currentY + 80).lineWidth(1).strokeColor('#1ab0e2').stroke();
 
         currentY = 180;
 
@@ -765,7 +764,7 @@ app.post('/api/generate-internship-certificate', async (req, res) => {
 
         // --- STICKY FOOTER ---
         const footerY = 750; // Slightly higher to ensure it stays on page
-        doc.moveTo(50, footerY - 10).lineTo(550, footerY - 10).lineWidth(1).strokeColor('#1ab0e2').stroke();
+        doc.moveTo(0, footerY - 10).lineTo(595, footerY - 10).lineWidth(1).strokeColor('#1ab0e2').stroke();
         doc.font('Helvetica-Bold').fontSize(9).text(`S.A.R.L Au capital de ${company?.capital || ''}`, 50, footerY, { align: 'center', width: 500 });
         doc.font('Helvetica').fontSize(8);
         doc.text(`Siège Social : ${company?.adresse || ''}, ${company?.ville || ''}`, 50, footerY + 12, { align: 'center', width: 500 });

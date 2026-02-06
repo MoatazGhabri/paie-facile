@@ -169,10 +169,11 @@ export default function Employees() {
                 <TableHead>Code</TableHead>
                 <TableHead>Nom</TableHead>
                 <TableHead>Prénom</TableHead>
-                <TableHead>CIN</TableHead>
+                <TableHead>Poste</TableHead>
                 <TableHead>Type Contrat</TableHead>
                 <TableHead>Nationalité</TableHead>
-                <TableHead>Date d'embauche</TableHead>
+                <TableHead>Document</TableHead>
+                <TableHead>Embauche</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -184,13 +185,12 @@ export default function Employees() {
                   </TableCell>
                   <TableCell className="font-medium">{employee.nom}</TableCell>
                   <TableCell>{employee.prenom}</TableCell>
-                  <TableCell className="font-mono">{employee.cin}</TableCell>
+                  <TableCell>{employee.poste}</TableCell>
                   <TableCell>
                     <span className="inline-flex rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
                       {employee.type_contrat}
                     </span>
                   </TableCell>
-                  <TableCell>{employee.poste}</TableCell>
                   <TableCell>{employee.nationalite}</TableCell>
                   <TableCell>
                     <div className="flex flex-col">
@@ -261,36 +261,25 @@ export default function Employees() {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="cin">CIN *</Label>
-                <Input
-                  id="cin"
-                  value={formData.cin}
-                  onChange={(e) => setFormData({ ...formData, cin: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="type_contrat">Type de contrat *</Label>
-                <Select
-                  value={formData.type_contrat}
-                  onValueChange={(value: ContractType) =>
-                    setFormData({ ...formData, type_contrat: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {CONTRACT_TYPES.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
-                        {type.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="type_contrat">Type de contrat *</Label>
+              <Select
+                value={formData.type_contrat}
+                onValueChange={(value: ContractType) =>
+                  setFormData({ ...formData, type_contrat: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {CONTRACT_TYPES.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
